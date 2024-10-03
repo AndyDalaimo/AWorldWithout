@@ -3,6 +3,7 @@
 #include "AWorldWithoutCharacter.h"
 #include "Engine/LocalPlayer.h"
 #include "Camera/CameraComponent.h"
+#include "Components/BoxComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -50,6 +51,9 @@ AAWorldWithoutCharacter::AAWorldWithoutCharacter()
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
 	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
+	CharacterCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("CharacterCollision"));
+	CharacterCollision->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform);
+
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 }
@@ -58,6 +62,9 @@ void AAWorldWithoutCharacter::BeginPlay()
 {
 	// Call the base class  
 	Super::BeginPlay();
+	FocusedActor = nullptr;
+	CharacterCollision->OnComponentBeginOverlap.AddDynamic(this, &AAWorldWithoutCharacter::OverlapStarted);
+	CharacterCollision->OnComponentEndOverlap.AddDynamic(this, &AAWorldWithoutCharacter::OverlapEnded);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -86,6 +93,9 @@ void AAWorldWithoutCharacter::SetupPlayerInputComponent(UInputComponent* PlayerI
 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AAWorldWithoutCharacter::Look);
+
+		// Interact
+		EnhancedInputComponent->BindAction(InteractAction, ETriggerEvent::Completed, this, &AAWorldWithoutCharacter::Interact);
 	}
 	else
 	{
@@ -93,6 +103,9 @@ void AAWorldWithoutCharacter::SetupPlayerInputComponent(UInputComponent* PlayerI
 	}
 }
 
+// --------------------------------------------------------------------
+// -------------------- Input Functionality ---------------------------
+// --------------------------------------------------------------------
 void AAWorldWithoutCharacter::Move(const FInputActionValue& Value)
 {
 	// input is a Vector2D
@@ -126,5 +139,41 @@ void AAWorldWithoutCharacter::Look(const FInputActionValue& Value)
 		// add yaw and pitch input to controller
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(LookAxisVector.Y);
+	}
+}
+
+void AAWorldWithoutCharacter::Interact(const FInputActionValue& Value)
+{
+	if (FocusedActor != nullptr)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("You are trying to interact"));
+		IInteractableInterface::Execute_ActionToComplete(FocusedActor);
+	}
+}
+
+// --------------------------------------------------------------------
+// -------------------- Overlap Functionality -------------------------
+// --------------------------------------------------------------------
+
+void AAWorldWithoutCharacter::OverlapStarted_Implementation(UPrimitiveComponent* OverlappedComponent,
+	AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex,
+	bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (OtherActor->Implements<UInteractableInterface>())
+	{
+		bCanInteract = true;
+		FocusedActor = OtherActor;
+		IInteractableInterface::Execute_ShowInteractWidget(OtherActor, this);
+	}
+}
+
+void AAWorldWithoutCharacter::OverlapEnded_Implementation(UPrimitiveComponent* OverlappedComponent,
+	AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+	if (OtherActor->Implements<UInteractableInterface>())
+	{
+		bCanInteract = false;
+		FocusedActor = nullptr;
+		IInteractableInterface::Execute_HideInteractWidget(OtherActor, this);
 	}
 }

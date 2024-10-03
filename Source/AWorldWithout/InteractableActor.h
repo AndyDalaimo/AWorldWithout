@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Components/WidgetComponent.h"
+#include "AC_Interactable.h"
 #include "InteractableInterface.h"
 #include "InteractableActor.generated.h"
 
@@ -18,8 +19,14 @@ public:
 	// Sets default values for this actor's properties
 	AInteractableActor();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Widget)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Mesh)
+	UStaticMeshComponent* MeshComp;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Interaction)
 	UWidgetComponent* InteractWidget;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadonly, Category = Interaction)
+	UAC_Interactable* InteractComp;
 
 protected:
 	// Called when the game starts or when spawned
@@ -30,8 +37,9 @@ public:
 	// virtual void Tick(float DeltaTime) override;
 
 	// Overridden Interface Functions (Blueprint Native Events)
-	void ShowInteractWidget_Implementation() override;
-	void HideInteractWidget_Implementation() override;
+	virtual void ShowInteractWidget_Implementation(AActor* InteractableActor) override;
+	virtual void HideInteractWidget_Implementation(AActor* InteractableActor) override;
+	virtual void ActionToComplete_Implementation() override;
 
 
 };

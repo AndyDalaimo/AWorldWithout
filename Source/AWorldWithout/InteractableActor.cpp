@@ -9,9 +9,14 @@ AInteractableActor::AInteractableActor()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
+	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComponent"));
+	RootComponent = MeshComp;
+
 	InteractWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("InteractWidget"));
-	InteractWidget->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+	InteractWidget->SetupAttachment(MeshComp);
 	InteractWidget->SetVisibility(false);
+	InteractComp = CreateDefaultSubobject<UAC_Interactable>(TEXT("InteractComp"));
+
 
 
 }
@@ -37,14 +42,21 @@ void AInteractableActor::BeginPlay()
 // ---------------------------------------------------------------------
 // ---------------- Overridden Interface Functions --------------------
 // ---------------------------------------------------------------------
-void AInteractableActor::ShowInteractWidget_Implementation()
+void AInteractableActor::ShowInteractWidget_Implementation(AActor* InteractableActor)
 {
 	// Make Widget Visible
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Show Widget"));
 	InteractWidget->SetVisibility(true);
 }
 
-void AInteractableActor::HideInteractWidget_Implementation()
+void AInteractableActor::HideInteractWidget_Implementation(AActor* InteractableActor)
 {
 	// Hide Widget
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Hide Widget"));
 	InteractWidget->SetVisibility(false);
+}
+
+void AInteractableActor::ActionToComplete_Implementation()
+{
+	UE_LOG(LogTemp, Display, TEXT("Interacting with %s"), *this->GetName());
 }
