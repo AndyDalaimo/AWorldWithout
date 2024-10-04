@@ -31,5 +31,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category=Interactable)
 	void ActionToComplete();
-	// void ActionToComplete(AActor* InteractableActor);
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category=Interactable)
+	FString GetDialogue();
 };

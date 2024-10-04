@@ -12,6 +12,7 @@ class USpringArmComponent;
 class UBoxComponent;
 class UCameraComponent;
 class UInputMappingContext;
+class UWidgetComponent;
 class UInputAction;
 struct FInputActionValue;
 
@@ -54,7 +55,7 @@ class AAWorldWithoutCharacter : public ACharacter, public IInteractableInterface
 
 public:
 	AAWorldWithoutCharacter();
-	
+
 
 protected:
 

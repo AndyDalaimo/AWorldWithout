@@ -32,3 +32,41 @@ void UAC_Interactable::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 	// ...
 }
 
+void UAC_Interactable::Dialogue()
+{
+	if (InteractData.bSpokenTo || InteractData.InteractableType == EInteractableType::POSTER)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("%s"), *InteractData.AfterDialogue[InteractData.DialogueIndex]);
+		if (InteractData.DialogueIndex < InteractData.AfterDialogue.Num() - 1) InteractData.DialogueIndex++;
+		else InteractData.DialogueIndex = 0;
+	}
+	else {
+		UE_LOG(LogTemp, Warning, TEXT("%s"), *InteractData.FirstDialogue[InteractData.DialogueIndex]);
+		if (InteractData.DialogueIndex < InteractData.FirstDialogue.Num() - 1) InteractData.DialogueIndex++;
+		else InteractData.DialogueIndex = 0;
+	}
+}
+
+void UAC_Interactable::SetCurrentLineOfDialogue()
+{
+
+	
+	if (InteractData.bSpokenTo || InteractData.InteractableType == EInteractableType::POSTER)
+	{
+
+		// UE_LOG(LogTemp, Warning, TEXT("%s"), *InteractData.AfterDialogue[InteractData.DialogueIndex]);
+		InteractData.CurrentDialogue = InteractData.AfterDialogue[InteractData.DialogueIndex];
+		UE_LOG(LogTemp, Warning, TEXT("%s"), *InteractData.CurrentDialogue);
+		if (InteractData.DialogueIndex < InteractData.AfterDialogue.Num() - 1) InteractData.DialogueIndex++;
+		else InteractData.DialogueIndex = 0;
+	}
+	else {
+		// UE_LOG(LogTemp, Warning, TEXT("%s"), *InteractData.FirstDialogue[InteractData.DialogueIndex]);
+		UE_LOG(LogTemp, Warning, TEXT("%s"), *InteractData.CurrentDialogue);
+		InteractData.CurrentDialogue = InteractData.FirstDialogue[InteractData.DialogueIndex];
+		if (InteractData.DialogueIndex < InteractData.FirstDialogue.Num() - 1) InteractData.DialogueIndex++;
+		else InteractData.DialogueIndex = 0;
+	}
+
+}
+

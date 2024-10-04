@@ -28,6 +28,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadonly, Category = Interaction)
 	UAC_Interactable* InteractComp;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Interaction)
+	UWidgetComponent* DialogueWidget;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -40,6 +43,7 @@ public:
 	virtual void ShowInteractWidget_Implementation(AActor* InteractableActor) override;
 	virtual void HideInteractWidget_Implementation(AActor* InteractableActor) override;
 	virtual void ActionToComplete_Implementation() override;
+	virtual FString GetDialogue_Implementation() override;
 
 
 };

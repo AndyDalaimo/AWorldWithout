@@ -54,6 +54,7 @@ AAWorldWithoutCharacter::AAWorldWithoutCharacter()
 	CharacterCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("CharacterCollision"));
 	CharacterCollision->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform);
 
+
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 }
@@ -161,7 +162,6 @@ void AAWorldWithoutCharacter::OverlapStarted_Implementation(UPrimitiveComponent*
 {
 	if (OtherActor->Implements<UInteractableInterface>())
 	{
-		bCanInteract = true;
 		FocusedActor = OtherActor;
 		IInteractableInterface::Execute_ShowInteractWidget(OtherActor, this);
 	}
@@ -172,7 +172,6 @@ void AAWorldWithoutCharacter::OverlapEnded_Implementation(UPrimitiveComponent* O
 {
 	if (OtherActor->Implements<UInteractableInterface>())
 	{
-		bCanInteract = false;
 		FocusedActor = nullptr;
 		IInteractableInterface::Execute_HideInteractWidget(OtherActor, this);
 	}
