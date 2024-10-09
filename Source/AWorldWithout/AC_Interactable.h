@@ -38,8 +38,6 @@ public:
 	TArray<FString> AfterDialogue;
 
 	int DialogueIndex = 0;
-
-	
 };
 
 

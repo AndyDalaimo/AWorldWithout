@@ -18,8 +18,6 @@ AInteractableActor::AInteractableActor()
 
 	InteractComp = CreateDefaultSubobject<UAC_Interactable>(TEXT("InteractComp"));
 
-
-
 }
 
 // Called when the game starts or when spawned
@@ -61,8 +59,6 @@ void AInteractableActor::HideInteractWidget_Implementation(AActor* InteractableA
 
 void AInteractableActor::ActionToComplete_Implementation()
 {
-	// UE_LOG(LogTemp, Display, TEXT("Interacting with %s"), *this->GetName());
-	// InteractComp->Dialogue();
 	InteractComp->SetCurrentLineOfDialogue();
 }
 
