@@ -11,6 +11,7 @@
 class USpringArmComponent;
 class UBoxComponent;
 class UCameraComponent;
+class UWidgetComponent;
 class UInputMappingContext;
 class UWidgetComponent;
 class UInputAction;
@@ -53,9 +54,12 @@ class AAWorldWithoutCharacter : public ACharacter, public IInteractableInterface
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* InteractAction;
 
+
 public:
 	AAWorldWithoutCharacter();
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Interaction)
+	UWidgetComponent* DialogueWidget;
 
 protected:
 
@@ -70,6 +74,7 @@ protected:
 	void Look(const FInputActionValue& Value);
 
 	void Interact(const FInputActionValue& Value);
+
 
 	UFUNCTION(BlueprintNativeEvent, Category = "Overlap")
 	void OverlapStarted(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, 
@@ -93,6 +98,13 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
+	UFUNCTION(BlueprintPure)
+	FString GetInteractableActorDialogue();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void SetCurrentDialogue();
+	void SetCurrentDialogue_Implementation() { };
 
 };
 

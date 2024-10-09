@@ -15,10 +15,6 @@ AInteractableActor::AInteractableActor()
 	InteractWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("InteractWidget"));
 	InteractWidget->SetupAttachment(MeshComp);
 	InteractWidget->SetVisibility(false);
-	
-	DialogueWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("DialogueWidget"));
-	DialogueWidget->SetupAttachment(MeshComp);
-	DialogueWidget->SetVisibility(false);
 
 	InteractComp = CreateDefaultSubobject<UAC_Interactable>(TEXT("InteractComp"));
 
@@ -58,8 +54,9 @@ void AInteractableActor::HideInteractWidget_Implementation(AActor* InteractableA
 {
 	// Hide Widget
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Hide Widget"));
+	InteractComp->InteractData.bSpokenTo = true;
+	InteractComp->InteractData.DialogueIndex = 0;
 	InteractWidget->SetVisibility(false);
-	DialogueWidget->SetVisibility(false);
 }
 
 void AInteractableActor::ActionToComplete_Implementation()
@@ -67,14 +64,12 @@ void AInteractableActor::ActionToComplete_Implementation()
 	// UE_LOG(LogTemp, Display, TEXT("Interacting with %s"), *this->GetName());
 	// InteractComp->Dialogue();
 	InteractComp->SetCurrentLineOfDialogue();
-	DialogueWidget->SetVisibility(true);
-	
 }
 
-// Revision History 10/04/2024 - AD - Trying to not code bad ;(
+
 // TODO ---- > Return the current line of Dialogue
 FString AInteractableActor::GetDialogue_Implementation()
 {
-	
-	return FString();
+	if (InteractComp != nullptr) return InteractComp->GetCurrentLineOfDialogue();
+	else return FString("Empty Component");
 }
