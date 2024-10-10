@@ -12,3 +12,17 @@ void ABook::ActionToComplete_Implementation()
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Black, TEXT("Do this instead: Book"));
 
 }
+
+void ABook::GenerateBookTitle(int32 Seed)
+{
+	if (DT_TitleGenerator != nullptr)
+	{
+		TArray<FName> RowNames = DT_TitleGenerator->GetRowNames();
+		
+		for (FName RowName : RowNames)
+		{
+			FTitleGenerator* Row = DT_TitleGenerator->FindRow<FTitleGenerator>(RowName, "");
+		}
+	}
+}
+

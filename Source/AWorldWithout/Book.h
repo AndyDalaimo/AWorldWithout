@@ -3,8 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "CustomStructures.h"
 #include "InteractableActor.h"
 #include "Book.generated.h"
+
+
 
 /**
  * 
@@ -16,7 +19,16 @@ class AWORLDWITHOUT_API ABook : public AInteractableActor
 
 public:
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Title)
+	FString Title;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Title)
+	UDataTable* DT_TitleGenerator;
+
 	// Overridden from Interactable actor 
 	virtual void ActionToComplete_Implementation() override;
+
+	UFUNCTION(BlueprintCallable)
+	void GenerateBookTitle(int32 Seed);
 	
 };
