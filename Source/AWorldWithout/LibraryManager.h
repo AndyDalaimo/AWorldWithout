@@ -7,6 +7,8 @@
 #include "Book.h"
 #include "LibraryManager.generated.h"
 
+DECLARE_MULTICAST_DELEGATE_OneParam(PuzzleSignature, int);
+
 /**
  * 
  */
@@ -20,5 +22,18 @@ class AWORLDWITHOUT_API ALibraryManager : public AInfo
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Puzzle")
 		TArray<ABook*> PuzzleBooks;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Puzzle")
+	TArray<bool> PuzzleSolutions;
+
+	PuzzleSignature SolutionDelegate;
+
+	UFUNCTION(BlueprintCallable)
+	void SolutionFound(int index);
+
+protected:
+	virtual void BeginPlay();
+
+	void InitializePuzzle();
 	
 };

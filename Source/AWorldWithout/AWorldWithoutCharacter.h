@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "InteractableInterface.h"
+#include "LibraryManager.h"
 #include "Logging/LogMacros.h"
 #include "AWorldWithoutCharacter.generated.h"
 
