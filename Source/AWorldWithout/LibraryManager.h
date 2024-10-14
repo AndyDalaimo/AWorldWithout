@@ -7,6 +7,8 @@
 #include "Book.h"
 #include "LibraryManager.generated.h"
 
+class APuzzleDoor;
+
 DECLARE_MULTICAST_DELEGATE_OneParam(PuzzleSignature, int);
 
 /**

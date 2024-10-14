@@ -9,6 +9,9 @@
 
 void APuzzleSolutionBook::BeginPlay()
 {
+
+	Super::BeginPlay();
+
 	ManagerRef = Cast<ALibraryManager>(UGameplayStatics::GetActorOfClass(GetWorld(), ALibraryManager::StaticClass()));
 	if (ManagerRef == nullptr) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "ManagerRef not found!");
 }

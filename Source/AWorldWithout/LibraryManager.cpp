@@ -3,6 +3,8 @@
 
 #include "LibraryManager.h"
 
+#include "PuzzleDoor.h"
+
 ALibraryManager::ALibraryManager()
 {
 }

@@ -12,3 +12,14 @@ void APuzzleDoor::ActionToComplete_Implementation()
 	// Will launch UI for DoorCode
 	GC_InputDoorCode();
 }
+
+bool APuzzleDoor::CheckPasscode(int value) const
+{
+	if (value == Passcode)
+	{
+		return true;
+	}
+	else {
+		return false;
+	}
+}
