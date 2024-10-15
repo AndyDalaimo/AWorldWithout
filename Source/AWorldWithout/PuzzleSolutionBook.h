@@ -7,6 +7,7 @@
 #include "PuzzleSolutionBook.generated.h"
 
 class ALibraryManager;
+class UBoxComponent;
 
 /**
  * 
@@ -19,10 +20,22 @@ class AWORLDWITHOUT_API APuzzleSolutionBook : public AInteractableActor
 protected:
 
 	virtual void BeginPlay() override;
-
+	
 	ALibraryManager* ManagerRef;
 
 public:
+
+	APuzzleSolutionBook();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Hint")
+	UBoxComponent* HintCollision;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Title)
+	FString Title;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Hint")
+	bool bHintActive;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Solution")
 	int SolutionIndex;
 

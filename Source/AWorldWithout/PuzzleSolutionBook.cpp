@@ -4,8 +4,15 @@
 #include "PuzzleSolutionBook.h"
 
 #include "LibraryManager.h"
+#include "Components/BoxComponent.h"
 #include "Kismet/GameplayStatics.h"
 
+
+APuzzleSolutionBook::APuzzleSolutionBook()
+{
+	HintCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("HintCollision"));
+	HintCollision->SetupAttachment(RootComponent);
+}
 
 void APuzzleSolutionBook::BeginPlay()
 {
@@ -16,10 +23,12 @@ void APuzzleSolutionBook::BeginPlay()
 	if (ManagerRef == nullptr) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "ManagerRef not found!");
 }
 
+
 void APuzzleSolutionBook::ActionToComplete_Implementation()
 {
 	if (ManagerRef != nullptr)
 	{
 		ManagerRef->SolutionDelegate.Broadcast(SolutionIndex);
+		bHintActive = true;
 	}
 }
