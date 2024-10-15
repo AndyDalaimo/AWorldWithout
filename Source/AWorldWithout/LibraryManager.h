@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Info.h"
 #include "Book.h"
+#include "InteractiveComputer.h"
 #include "LibraryManager.generated.h"
 
 class APuzzleDoor;
@@ -27,6 +28,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Puzzle")
 	TArray<bool> PuzzleSolutions;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Puzzle")
+	AInteractiveComputer* ComputerRef;
 
 	PuzzleSignature SolutionDelegate;
 
