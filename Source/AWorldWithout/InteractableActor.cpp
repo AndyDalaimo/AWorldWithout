@@ -15,6 +15,10 @@ AInteractableActor::AInteractableActor()
 	InteractWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("InteractWidget"));
 	InteractWidget->SetupAttachment(MeshComp);
 	InteractWidget->SetVisibility(false);
+	
+	DialogueWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("DialogueWidget"));
+	DialogueWidget->SetupAttachment(MeshComp);
+	DialogueWidget->SetVisibility(false);
 
 	InteractComp = CreateDefaultSubobject<UAC_Interactable>(TEXT("InteractComp"));
 
@@ -68,4 +72,9 @@ FString AInteractableActor::GetDialogue_Implementation()
 {
 	if (InteractComp != nullptr) return InteractComp->GetCurrentLineOfDialogue();
 	else return FString("Empty Component");
+}
+
+void AInteractableActor::SetDialogueWidget_Implementation()
+{
+	DialogueWidget->SetVisibility(true);
 }

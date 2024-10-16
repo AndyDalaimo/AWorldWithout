@@ -34,4 +34,8 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category=Interactable)
 	FString GetDialogue();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category=Interactable)
+	void SetDialogueWidget();
+
 };

@@ -59,9 +59,6 @@ class AAWorldWithoutCharacter : public ACharacter, public IInteractableInterface
 public:
 	AAWorldWithoutCharacter();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Interaction)
-	UWidgetComponent* DialogueWidget;
-
 protected:
 
 	// Interaction

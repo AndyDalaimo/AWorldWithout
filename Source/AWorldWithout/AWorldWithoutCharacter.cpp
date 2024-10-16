@@ -55,10 +55,6 @@ AAWorldWithoutCharacter::AAWorldWithoutCharacter()
 	CharacterCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("CharacterCollision"));
 	CharacterCollision->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform);
 
-	DialogueWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("DialogueWidget"));
-	DialogueWidget->SetupAttachment(RootComponent);
-	DialogueWidget->SetVisibility(false);
-
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
@@ -157,7 +153,6 @@ void AAWorldWithoutCharacter::Interact(const FInputActionValue& Value)
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("You are trying to interact"));
 		IInteractableInterface::Execute_ActionToComplete(FocusedActor);
 		SetCurrentDialogue();
-		DialogueWidget->SetVisibility(true);
 	}
 }
 
@@ -193,7 +188,6 @@ void AAWorldWithoutCharacter::OverlapEnded_Implementation(UPrimitiveComponent* O
 	{
 		FocusedActor = nullptr;
 		IInteractableInterface::Execute_HideInteractWidget(OtherActor, this);
-		DialogueWidget->SetVisibility(false);
 	}
 }
 

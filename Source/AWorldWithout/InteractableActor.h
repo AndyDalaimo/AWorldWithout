@@ -24,6 +24,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Interaction)
 	UWidgetComponent* InteractWidget;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Interaction)
+	UWidgetComponent* DialogueWidget;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadonly, Category = Interaction)
 	UAC_Interactable* InteractComp;
@@ -42,6 +45,7 @@ public:
 	virtual void HideInteractWidget_Implementation(AActor* InteractableActor) override;
 	virtual void ActionToComplete_Implementation() override;
 	virtual FString GetDialogue_Implementation() override;
+	virtual void SetDialogueWidget_Implementation() override;
 	
 
 
