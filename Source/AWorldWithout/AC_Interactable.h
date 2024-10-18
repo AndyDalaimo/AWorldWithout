@@ -26,6 +26,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = InteractData)
 	bool bSpokenTo;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = InteractData)
+	FString Title;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = InteractData)
 	FString CurrentDialogue;
 

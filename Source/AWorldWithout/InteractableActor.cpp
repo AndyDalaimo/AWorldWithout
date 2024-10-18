@@ -59,11 +59,14 @@ void AInteractableActor::HideInteractWidget_Implementation(AActor* InteractableA
 	InteractComp->InteractData.bSpokenTo = true;
 	InteractComp->InteractData.DialogueIndex = 0;
 	InteractWidget->SetVisibility(false);
+	DialogueWidget->SetVisibility(false);
 }
 
 void AInteractableActor::ActionToComplete_Implementation()
 {
 	InteractComp->SetCurrentLineOfDialogue();
+	InteractWidget->SetVisibility(false);
+	DialogueWidget->SetVisibility(true);
 }
 
 

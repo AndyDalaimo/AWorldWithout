@@ -10,6 +10,7 @@ void APuzzleDoor::ActionToComplete_Implementation()
 {
 	// Call to Gameplay Cue defined in BP
 	// Will launch UI for DoorCode
+	InteractWidget->SetVisibility(false);
 	GC_InputDoorCode();
 }
 

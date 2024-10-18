@@ -28,5 +28,6 @@ void AInteractiveComputer::BeginPlay()
 void AInteractiveComputer::ActionToComplete_Implementation()
 {
 	GC_ComputerInteract();
+	InteractWidget->SetVisibility(false);
 }
 

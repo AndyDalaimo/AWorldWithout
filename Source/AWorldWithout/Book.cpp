@@ -10,7 +10,7 @@
 void ABook::ActionToComplete_Implementation()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Black, TEXT("Do this instead: Book"));
-
+	InteractWidget->SetVisibility(false);
 }
 
 void ABook::GenerateBookTitle(int32 Seed)
