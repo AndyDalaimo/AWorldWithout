@@ -31,6 +31,7 @@ void ALibraryManager::SolutionFound(int index)
 	UE_LOG(LogTemp, Display, TEXT("Soultion Found"));
 	PuzzleSolutions[index] = true;
 
+
 	if (PuzzleSolutions.Contains(false) == false)
 	{
 		UE_LOG(LogTemp, Display, TEXT("ALL Soultion Found"));

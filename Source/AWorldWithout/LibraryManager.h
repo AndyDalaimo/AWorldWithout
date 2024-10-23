@@ -23,6 +23,7 @@ class AWORLDWITHOUT_API ALibraryManager : public AInfo
 	ALibraryManager();
 
 public:
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Puzzle")
 		TArray<ABook*> PuzzleBooks;
 

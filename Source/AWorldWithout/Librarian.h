@@ -6,6 +6,8 @@
 #include "InteractableActor.h"
 #include "Librarian.generated.h"
 
+class ALibraryManager;
+
 USTRUCT(BlueprintType)
 struct FDialogueData
 {
@@ -24,6 +26,12 @@ UCLASS()
 class AWORLDWITHOUT_API ALibrarian : public AInteractableActor
 {
 	GENERATED_BODY()
+
+protected:
+
+	virtual void BeginPlay() override;
+
+	ALibraryManager* ManagerRef;
 
 
 public:
@@ -47,6 +55,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void SetCurrentDialogueInSequence();
+
+	UFUNCTION(BlueprintCallable)
+	void UpdateSeqeunce();
 
 	
 };

@@ -3,8 +3,21 @@
 
 #include "Librarian.h"
 
+#include "LibraryManager.h"
+#include "Kismet/GameplayStatics.h"
+
+void ALibrarian::BeginPlay()
+{
+	Super::BeginPlay();
+
+	ManagerRef = Cast<ALibraryManager>(UGameplayStatics::GetActorOfClass(GetWorld(), ALibraryManager::StaticClass()));
+	if (ManagerRef == nullptr) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "ManagerRef not found!");
+}
+
 void ALibrarian::ActionToComplete_Implementation()
 {
+	UpdateSeqeunce();
+	SetCurrentDialogueInSequence();
 	InteractWidget->SetVisibility(false);
 	DialogueWidget->SetVisibility(true);
 }
@@ -18,8 +31,26 @@ FString ALibrarian::GetCurrentDialogue()
 
 void ALibrarian::SetCurrentDialogueInSequence()
 {
-	//CurrentDialogue = FirstDialogue[InteractData.DialogueIndex];
-	//UE_LOG(LogTemp, Warning, TEXT("%s"), *InteractData.CurrentDialogue);
-	//if (InteractData.DialogueIndex < InteractData.FirstDialogue.Num() - 1) InteractData.DialogueIndex++;
-	//else InteractData.DialogueIndex = 0;
+	if (CurrentSequence < DialogueSequencer.Num() && DialogueIndex < DialogueSequencer[CurrentSequence].Dialogue.Num())
+	{
+		CurrentDialogue = DialogueSequencer[CurrentSequence].Dialogue[DialogueIndex];
+		UE_LOG(LogTemp, Warning, TEXT("%s"), *CurrentDialogue);
+	}		
+
+	// Increase / Reset Indices as needed
+	if (DialogueIndex < DialogueSequencer[CurrentSequence].Dialogue.Num() - 1) DialogueIndex++;
+	else DialogueIndex = 0;
+ 
+}
+
+// Player has found the a puzzle object, update the sequence correctly
+void ALibrarian::UpdateSeqeunce()
+{
+	CurrentSequence = ManagerRef->PuzzleSolutions.Find(false);
+	UE_LOG(LogTemp, Warning, TEXT("Current Sequence: %d"), CurrentSequence);
+	if (CurrentSequence == -1)
+	{
+		CurrentSequence = 4;
+		UE_LOG(LogTemp, Warning, TEXT("All Books found, Point player towards the Door"));
+	}
 }
