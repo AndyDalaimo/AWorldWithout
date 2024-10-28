@@ -176,8 +176,9 @@ void AAWorldWithoutCharacter::OverlapStarted_Implementation(UPrimitiveComponent*
 {
 	if (OtherActor->Implements<UInteractableInterface>())
 	{
+		FocusedActor = nullptr;
 		FocusedActor = OtherActor;
-		IInteractableInterface::Execute_ShowInteractWidget(OtherActor, this);
+		IInteractableInterface::Execute_ShowInteractWidget(OtherActor);
 	}
 }
 
@@ -186,8 +187,7 @@ void AAWorldWithoutCharacter::OverlapEnded_Implementation(UPrimitiveComponent* O
 {
 	if (OtherActor->Implements<UInteractableInterface>())
 	{
-		FocusedActor = nullptr;
-		IInteractableInterface::Execute_HideInteractWidget(OtherActor, this);
+		IInteractableInterface::Execute_HideInteractWidget(OtherActor);
 	}
 }
 

@@ -24,10 +24,12 @@ class AWORLDWITHOUT_API IInteractableInterface
 public:
 	// Will trigger widget in Interactable Actor
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category=Interactable)
-	void ShowInteractWidget(AActor* InteractableActor);
+	void ShowInteractWidget();
+	// void ShowInteractWidget(AActor* InteractableActor);
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category=Interactable)
-	void HideInteractWidget(AActor* InteractableActor);
+	void HideInteractWidget();
+	// void HideInteractWidget(AActor* InteractableActor);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category=Interactable)
 	void ActionToComplete();

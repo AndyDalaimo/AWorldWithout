@@ -36,13 +36,14 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+
 public:	
 	// Called every frame
 	// virtual void Tick(float DeltaTime) override;
 
 	// Overridden Interface Functions (Blueprint Native Events)
-	virtual void ShowInteractWidget_Implementation(AActor* InteractableActor) override;
-	virtual void HideInteractWidget_Implementation(AActor* InteractableActor) override;
+	virtual void ShowInteractWidget_Implementation() override;
+	virtual void HideInteractWidget_Implementation() override;
 	virtual void ActionToComplete_Implementation() override;
 	virtual FString GetDialogue_Implementation() override;
 	virtual void SetDialogueWidget_Implementation() override;

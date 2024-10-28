@@ -45,14 +45,15 @@ void AInteractableActor::BeginPlay()
 // ---------------------------------------------------------------------
 // ---------------- Overridden Interface Functions --------------------
 // ---------------------------------------------------------------------
-void AInteractableActor::ShowInteractWidget_Implementation(AActor* InteractableActor)
+// void AInteractableActor::ShowInteractWidget_Implementation(AActor* InteractableActor)
+void AInteractableActor::ShowInteractWidget_Implementation()
 {
 	// Make Widget Visible
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Show Widget"));
 	InteractWidget->SetVisibility(true);
 }
 
-void AInteractableActor::HideInteractWidget_Implementation(AActor* InteractableActor)
+void AInteractableActor::HideInteractWidget_Implementation()
 {
 	// Hide Widget
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Hide Widget"));

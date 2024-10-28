@@ -82,6 +82,8 @@ protected:
 	UFUNCTION(BlueprintNativeEvent, Category = "Overlap")
 	void OverlapEnded(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, 
 		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
+private:
 			
 
 protected:
