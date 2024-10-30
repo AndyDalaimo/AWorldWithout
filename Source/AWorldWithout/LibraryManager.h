@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Info.h"
-#include "Book.h"
+#include "PuzzleSolutionBook.h"
 #include "InteractiveComputer.h"
 #include "LibraryManager.generated.h"
 
@@ -25,7 +25,7 @@ class AWORLDWITHOUT_API ALibraryManager : public AInfo
 public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Puzzle")
-		TArray<ABook*> PuzzleBooks;
+		TArray<APuzzleSolutionBook*> PuzzleBooks;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Puzzle")
 	TArray<bool> PuzzleSolutions;
@@ -37,6 +37,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void SolutionFound(int index);
+
+	UFUNCTION(BlueprintCallable)
+	void HintFound(int index);
 
 protected:
 	virtual void BeginPlay();

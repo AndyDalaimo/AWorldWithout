@@ -22,8 +22,6 @@ void ALibrarian::ActionToComplete_Implementation()
 	DialogueWidget->SetVisibility(true);
 }
 
-
-
 FString ALibrarian::GetCurrentDialogue()
 {
 	return CurrentDialogue;
@@ -40,12 +38,12 @@ void ALibrarian::SetCurrentDialogueInSequence()
 	// Increase / Reset Indices as needed
 	if (DialogueIndex < DialogueSequencer[CurrentSequence].Dialogue.Num() - 1) DialogueIndex++;
 	else DialogueIndex = 0;
- 
 }
 
 // Player has found the a puzzle object, update the sequence correctly
 void ALibrarian::UpdateSeqeunce()
 {
+	int temp = CurrentSequence;
 	CurrentSequence = ManagerRef->PuzzleSolutions.Find(false);
 	UE_LOG(LogTemp, Warning, TEXT("Current Sequence: %d"), CurrentSequence);
 	if (CurrentSequence == -1)
@@ -53,4 +51,6 @@ void ALibrarian::UpdateSeqeunce()
 		CurrentSequence = 4;
 		UE_LOG(LogTemp, Warning, TEXT("All Books found, Point player towards the Door"));
 	}
+
+	if (temp != CurrentSequence && CurrentSequence < ManagerRef->PuzzleBooks.Num()) ManagerRef->PuzzleBooks[CurrentSequence]->HintRecieved();
 }

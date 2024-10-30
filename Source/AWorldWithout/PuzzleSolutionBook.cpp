@@ -32,3 +32,8 @@ void APuzzleSolutionBook::ActionToComplete_Implementation()
 		bHintActive = true;
 	}
 }
+
+void APuzzleSolutionBook::HintRecieved()
+{
+	bHintActive = true;
+}

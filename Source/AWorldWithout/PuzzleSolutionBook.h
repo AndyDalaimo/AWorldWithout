@@ -42,4 +42,7 @@ public:
 	// Overridden from Interactable actor 
 	virtual void ActionToComplete_Implementation() override;
 	
+	// Hint in world found, trigger Dynamic Material
+	UFUNCTION(BlueprintCallable)
+	void HintRecieved();
 };
