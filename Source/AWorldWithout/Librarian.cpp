@@ -22,6 +22,13 @@ void ALibrarian::ActionToComplete_Implementation()
 	DialogueWidget->SetVisibility(true);
 }
 
+void ALibrarian::HideInteractWidget_Implementation()
+{
+	InteractWidget->SetVisibility(false);
+	DialogueWidget->SetVisibility(false);
+	DialogueIndex = 0;
+}
+
 FString ALibrarian::GetCurrentDialogue()
 {
 	return CurrentDialogue;

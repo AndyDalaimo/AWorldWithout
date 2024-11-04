@@ -49,6 +49,7 @@ public:
 	TArray<FDialogueData> DialogueSequencer;
 
 	virtual void ActionToComplete_Implementation() override;
+	virtual void HideInteractWidget_Implementation() override;
 
 	UFUNCTION(BlueprintCallable)
 	FString GetCurrentDialogue();
