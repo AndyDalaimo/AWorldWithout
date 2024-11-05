@@ -29,6 +29,7 @@ void APuzzleSolutionBook::ActionToComplete_Implementation()
 	if (ManagerRef != nullptr && bHintActive)
 	{
 		ManagerRef->SolutionDelegate.Broadcast(SolutionIndex);
+		InteractWidget->SetVisibility(false);
 	}
 }
 
@@ -43,5 +44,6 @@ void APuzzleSolutionBook::ShowInteractWidget_Implementation()
 // Player has recieved hint and can interact with book
 void APuzzleSolutionBook::HintRecieved()
 {
+	UE_LOG(LogTemp, Warning, TEXT("Hint Recieved at %d"), SolutionIndex);
 	bHintActive = true;
 }

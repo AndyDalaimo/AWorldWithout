@@ -50,7 +50,7 @@ void ALibrarian::SetCurrentDialogueInSequence()
 // Player has found the a puzzle object, update the sequence correctly
 void ALibrarian::UpdateSeqeunce()
 {
-	int temp = CurrentSequence;
+	// int temp = CurrentSequence;
 	CurrentSequence = ManagerRef->PuzzleSolutions.Find(false);
 	UE_LOG(LogTemp, Warning, TEXT("Current Sequence: %d"), CurrentSequence);
 	if (CurrentSequence == -1)
@@ -58,6 +58,9 @@ void ALibrarian::UpdateSeqeunce()
 		CurrentSequence = 4;
 		UE_LOG(LogTemp, Warning, TEXT("All Books found, Point player towards the Door"));
 	}
-
-	if (temp != CurrentSequence && CurrentSequence < ManagerRef->PuzzleBooks.Num()) ManagerRef->PuzzleBooks[CurrentSequence]->HintRecieved();
+	// temp != CurrentSequence &&
+	if (CurrentSequence < ManagerRef->PuzzleBooks.Num())
+	{
+		ManagerRef->PuzzleBooks[CurrentSequence]->HintRecieved();
+	}
 }

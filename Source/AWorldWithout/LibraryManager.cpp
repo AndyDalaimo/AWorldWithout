@@ -45,4 +45,6 @@ void ALibraryManager::SolutionFound(int index)
 void ALibraryManager::HintFound(int index)
 {
 	PuzzleBooks[index]->HintRecieved();
+	UE_LOG(LogTemp, Display, TEXT("Book %d Hint Recieved"), index);
+
 }
