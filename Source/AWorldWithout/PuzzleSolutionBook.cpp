@@ -30,6 +30,8 @@ void APuzzleSolutionBook::ActionToComplete_Implementation()
 	{
 		ManagerRef->SolutionDelegate.Broadcast(SolutionIndex);
 		InteractWidget->SetVisibility(false);
+		if (DialogueWidget->IsWidgetVisible()) DialogueWidget->SetVisibility(false);
+		else DialogueWidget->SetVisibility(true);
 	}
 }
 
@@ -38,6 +40,7 @@ void APuzzleSolutionBook::ShowInteractWidget_Implementation()
 	if (bHintActive)
 	{
 		InteractWidget->SetVisibility(true);
+		DialogueWidget->SetVisibility(false);
 	}
 }
 

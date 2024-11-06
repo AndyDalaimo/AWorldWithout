@@ -58,9 +58,10 @@ void ALibrarian::UpdateSeqeunce()
 		CurrentSequence = 4;
 		UE_LOG(LogTemp, Warning, TEXT("All Books found, Point player towards the Door"));
 	}
-	// temp != CurrentSequence &&
+
 	if (CurrentSequence < ManagerRef->PuzzleBooks.Num())
 	{
 		ManagerRef->PuzzleBooks[CurrentSequence]->HintRecieved();
 	}
+	// temp != CurrentSequence &&
 }

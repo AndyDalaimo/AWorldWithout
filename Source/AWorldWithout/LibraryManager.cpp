@@ -18,13 +18,11 @@ void ALibraryManager::BeginPlay()
 }
 
 // Initialize Puzzle to Fill Solution Array with all false
+// Puzzle Actors filled in before game starts
 void ALibraryManager::InitializePuzzle()
 {
-	TArray<AActor*> Actors;
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), APuzzleSolutionBook::StaticClass(), Actors);
-	for (int i = 0; i < Actors.Num(); i++)
+	for (int i = 0; i < PuzzleBooks.Num(); i++)
 	{
-		PuzzleBooks.Push(Cast<APuzzleSolutionBook>(Actors[i]));
 		PuzzleSolutions.Push(false);
 	}
 }
@@ -46,5 +44,4 @@ void ALibraryManager::HintFound(int index)
 {
 	PuzzleBooks[index]->HintRecieved();
 	UE_LOG(LogTemp, Display, TEXT("Book %d Hint Recieved"), index);
-
 }
