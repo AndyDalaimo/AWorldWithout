@@ -188,6 +188,7 @@ void AAWorldWithoutCharacter::OverlapEnded_Implementation(UPrimitiveComponent* O
 	if (OtherActor->Implements<UInteractableInterface>())
 	{
 		IInteractableInterface::Execute_HideInteractWidget(OtherActor);
+		FocusedActor = nullptr;
 	}
 }
 
